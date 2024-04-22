@@ -4,8 +4,9 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.tests.AnimationTest;
 
 public class Rectangles extends BasicGame {
-    private int x;
-    private int y;
+    private float x;
+    private float y;
+    private float speed;
 
 
     public Rectangles(String title) {
@@ -15,16 +16,20 @@ public class Rectangles extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         this.x = 100;
+        this.y = 100;
+        this.speed = 10.0f;
     }
 
     @Override
-    public void update(GameContainer gameContainer, int i) throws SlickException {
-        this.x++;
-        this.y++;
+    public void update(GameContainer gameContainer, int delta) throws SlickException {
+        this.x += (float) delta / this.speed;
 
-        if (this.x > 800 && this.y > 600) {
-            this.x = 50;
-            this.y = 50;
+        if (this.x > 800) {
+            this.x = 0;
+        }
+
+        if (this.y > 600) {
+            this.y = 100;
         }
     }
 
