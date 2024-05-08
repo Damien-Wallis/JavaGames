@@ -5,13 +5,19 @@ import org.newdawn.slick.*;
 public class Rectangles extends BasicGame {
     public enum Directions {LEFT, RIGHT, UP, DOWN}
 
-    private Directions direction;
-
     //rectangle-variables
     private float rectX;
     private float rectY;
     private float rectSpeedX;
     private float rectSpeedY;
+    private Directions rectDirection;
+
+    //circle-variables
+    private float crclX;
+    private float crclY;
+    private float crclSpeedX;
+    private float crclSpeedY;
+    private Directions crclDirection;
 
     public Rectangles(String title) {
         super(title);
@@ -24,37 +30,59 @@ public class Rectangles extends BasicGame {
         this.rectY = 101;
         this.rectSpeedX = 0.5f;
         this.rectSpeedY = 0.5f;
-        this.direction = Directions.RIGHT;
+        this.rectDirection = Directions.RIGHT;
+
+        //circle-setting
+        this.crclX = 0;
+        this.crclY = 101;
+        this.crclSpeedX = 0f;
+        this.crclSpeedY = 0.5f;
+        this.crclDirection = Directions.DOWN;
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
         //rectangle-movement
-        if (this.rectX >= 600 && this.direction == Directions.RIGHT) {
-            this.direction = Directions.DOWN;
-        } else if (this.rectY >= 400 && this.direction == Directions.DOWN) {
-            this.direction = Directions.LEFT;
-        } else if (this.rectX <= 100 && this.direction == Directions.LEFT) {
-            this.direction = Directions.UP;
-        } else if (this.rectY <= 100 && this.direction == Directions.UP) {
-            this.direction = Directions.RIGHT;
+        if (this.rectX >= 600 && this.rectDirection == Directions.RIGHT) {
+            this.rectDirection = Directions.DOWN;
+        } else if (this.rectY >= 400 && this.rectDirection == Directions.DOWN) {
+            this.rectDirection = Directions.LEFT;
+        } else if (this.rectX <= 100 && this.rectDirection == Directions.LEFT) {
+            this.rectDirection = Directions.UP;
+        } else if (this.rectY <= 100 && this.rectDirection == Directions.UP) {
+            this.rectDirection = Directions.RIGHT;
         }
 
         //rectangle-directions
-        if (this.direction == Directions.LEFT) {
+        if (this.rectDirection == Directions.LEFT) {
             this.rectX -= this.rectSpeedX / delta;
-        } else if (this.direction == Directions.RIGHT) {
+        } else if (this.rectDirection == Directions.RIGHT) {
             this.rectX += this.rectSpeedX / delta;
-        } else if (this.direction == Directions.DOWN) {
+        } else if (this.rectDirection == Directions.DOWN) {
             this.rectY += this.rectSpeedY / delta;
-        } else if (this.direction == Directions.UP) {
+        } else if (this.rectDirection == Directions.UP) {
             this.rectY -= this.rectSpeedY / delta;
+        }
+
+        //circle-movement
+        if (this.crclY >= 500 && this.crclDirection == Directions.DOWN) {
+            this.crclDirection = Directions.UP;
+        } else if (this.crclY <= 100 && this.crclDirection == Directions.UP) {
+            this.crclDirection = Directions.DOWN;
+        }
+        //circle-directions
+        if (this.crclDirection == Directions.DOWN) {
+            this.crclY += this.crclSpeedY / delta;
+        } else if (this.crclDirection == Directions.UP) {
+            this.crclY -= this.crclSpeedY / delta;
         }
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.drawRect(this.rectX, this.rectY, 100, 100);
+        graphics.drawOval(this.crclX, this.crclY, 50, 50);
+        //graphics.drawOval(this.rectX, this.rectY, 100, 100);
         graphics.drawString("Hello World", 50, 50);
     }
 
