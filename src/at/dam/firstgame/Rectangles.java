@@ -19,6 +19,13 @@ public class Rectangles extends BasicGame {
     private float crclSpeedY;
     private Directions crclDirection;
 
+    //oval-variables
+    private float ovalX;
+    private float ovalY;
+    private float ovalSpeedX;
+    private float ovalSpeedY;
+    private Directions ovalDirection;
+
     public Rectangles(String title) {
         super(title);
     }
@@ -38,6 +45,13 @@ public class Rectangles extends BasicGame {
         this.crclSpeedX = 0f;
         this.crclSpeedY = 0.5f;
         this.crclDirection = Directions.DOWN;
+
+        //oval-setting
+        this.ovalX = 50;
+        this.ovalY = 0;
+        this.ovalSpeedX = 0.5f;
+        this.ovalSpeedY = 0f;
+        this.ovalDirection = Directions.RIGHT;
     }
 
     @Override
@@ -76,13 +90,26 @@ public class Rectangles extends BasicGame {
         } else if (this.crclDirection == Directions.UP) {
             this.crclY -= this.crclSpeedY / delta;
         }
+
+        //oval-movement
+        if (this.ovalX >= 650 && this.ovalDirection == Directions.RIGHT) {
+            this.ovalDirection = Directions.LEFT;
+        } else if (this.ovalX <= 50 && this.ovalDirection == Directions.LEFT) {
+            this.ovalDirection = Directions.RIGHT;
+        }
+        //oval-directions
+        if (this.ovalDirection == Directions.RIGHT) {
+            this.ovalX += this.ovalSpeedX / delta;
+        } else if (this.ovalDirection == Directions.LEFT) {
+            this.ovalX -= this.ovalSpeedX / delta;
+        }
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.drawRect(this.rectX, this.rectY, 100, 100);
         graphics.drawOval(this.crclX, this.crclY, 50, 50);
-        //graphics.drawOval(this.rectX, this.rectY, 100, 100);
+        graphics.drawOval(this.ovalX, this.ovalY, 80, 30);
         graphics.drawString("Hello World", 50, 50);
     }
 
