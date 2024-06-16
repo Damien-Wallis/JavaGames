@@ -1,12 +1,10 @@
 package at.dam.firstgame;
 
 import org.newdawn.slick.*;
-import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.RecursiveAction;
 
 public class ObjectsGame extends BasicGame {
     private List<Actor> actors;
@@ -20,6 +18,10 @@ public class ObjectsGame extends BasicGame {
         this.actors = new ArrayList<>();
         Random random = new Random();
 
+
+        Rocket rocket = new Rocket();
+        this.actors.add(rocket);
+/*
         for (int i = 0; i < 10; i++) {
             Rectangle rectangle = new Rectangle(random.nextInt(600), random.nextInt(600), random.nextInt(40), Rectangle.DIRECTIONS.LEFT);
             actors.add(rectangle);
@@ -33,7 +35,7 @@ public class ObjectsGame extends BasicGame {
         for (int i = 0; i < 10; i++) {
             Ellipse ellipse = new Ellipse(random.nextInt(800), random.nextInt(600));
             this.actors.add(ellipse);
-        }
+        }*/
     }
 
     @Override
