@@ -2,7 +2,7 @@ package at.dam.firstgame;
 
 import org.newdawn.slick.Graphics;
 
-public class Rectangle {
+public class Rectangle implements Actor {
     private enum Directions {LEFT, RIGHT, UP, DOWN}
 
     private float x;
