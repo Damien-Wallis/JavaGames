@@ -1,5 +1,6 @@
 package at.dam.firstgame;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import java.util.Random;
@@ -23,7 +24,7 @@ public class Rectangle implements Actor {
         graphics.drawRect(this.x, this.y, 25, 50);
     }
 
-    public void update(int delta) {
+    public void update(GameContainer gameContainer, int delta) {
         if (this.direction == DIRECTIONS.LEFT) {
             this.x -= (float) delta / this.speed;
             if (this.x >= 800) {

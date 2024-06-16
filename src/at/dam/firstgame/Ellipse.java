@@ -1,5 +1,6 @@
 package at.dam.firstgame;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import java.util.Random;
@@ -20,7 +21,7 @@ public class Ellipse implements Actor {
     }
 
     @Override
-    public void update(int delta) {
+    public void update(GameContainer gameContainer, int delta) {
         Random random = new Random();
         if (this.x >= 800 || this.y >= 600) {
             this.x = random.nextInt(800);
