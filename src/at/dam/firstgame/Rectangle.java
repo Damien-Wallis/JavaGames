@@ -2,20 +2,21 @@ package at.dam.firstgame;
 
 import org.newdawn.slick.Graphics;
 
+import java.util.Random;
+
 public class Rectangle implements Actor {
-    private enum Directions {LEFT, RIGHT, UP, DOWN}
+    public enum DIRECTIONS {LEFT, RIGHT}
 
     private float x;
     private float y;
-    private float speedX;
-    private float speedY;
-    private Directions direction;
+    private float speed;
+    private DIRECTIONS direction = DIRECTIONS.LEFT;
 
-    public Rectangle(float x, float y, float speedX, float speedY) {
+    public Rectangle(float x, float y, float speed, DIRECTIONS direction) {
         this.x = x;
         this.y = y;
-        this.speedX = speedX;
-        this.speedY = speedY;
+        this.speed = speed;
+        this.direction = direction;
     }
 
     public void render(Graphics graphics) {
@@ -23,9 +24,16 @@ public class Rectangle implements Actor {
     }
 
     public void update(int delta) {
-        this.x += this.speedX / delta;
-        if (this.x >= 800) {
-            this.x = 0;
+        if (this.direction == DIRECTIONS.LEFT) {
+            this.x -= (float) delta / this.speed;
+            if (this.x >= 800) {
+                this.x = 0;
+            }
+        } else {
+            this.x += (float) delta / this.speed;
+            if (this.x <= 0) {
+                this.x = 800;
+            }
         }
     }
 }

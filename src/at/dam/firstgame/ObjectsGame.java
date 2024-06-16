@@ -6,6 +6,7 @@ import org.w3c.dom.css.Rect;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.RecursiveAction;
 
 public class ObjectsGame extends BasicGame {
     private List<Actor> actors;
@@ -18,17 +19,18 @@ public class ObjectsGame extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         this.actors = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i < 20; i++) {
-            Rectangle rectangle = new Rectangle(random.nextInt(600), random.nextInt(600), random.nextInt(3), random.nextInt(3));
+
+        for (int i = 0; i < 10; i++) {
+            Rectangle rectangle = new Rectangle(random.nextInt(600), random.nextInt(600), random.nextInt(40), Rectangle.DIRECTIONS.LEFT);
             actors.add(rectangle);
         }
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             Circle circle = new Circle();
             this.actors.add(circle);
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             Ellipse ellipse = new Ellipse(random.nextInt(800), random.nextInt(600));
             this.actors.add(ellipse);
         }
